@@ -51,7 +51,7 @@ $('#reg-form').on('submit',function(e){
         console.log(res.data);
         if(res.data.status ===0){
             layer.msg('注册成功');
-            $('#to-login').click();
+            // $('#to-login').click();
         }else{
             layer.msg('注册失败')
         }
@@ -76,6 +76,7 @@ $('#login-form').on('submit',function(e){
         console.log(res.data);
         if(res.data.status === 0){
             layer.msg('登录成功');
+            localStorage.setItem('Authorization',res.data.token)
             location.href = '../index/index.html'
         }else{
             layer.msg('登录失败')
@@ -83,6 +84,7 @@ $('#login-form').on('submit',function(e){
     })
     .catch(err=>{
         layer.msg('网络异常');
+        console.log(err);
     })
 
 

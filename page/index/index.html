@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>layout 管理系统大布局 - Layui</title>
+    <link rel="stylesheet" href="/lib/layui-v2.7.5/css/layui.css">
+</head>
+<!-- 写页面的一些步骤 -->
+    <!-- 第一步：引入初始化样式 -->
+
+    <link rel="stylesheet" href="/css/base.css">
+
+
+    <!-- 第四步：引入自己的css样式 -->
+    <link rel="stylesheet" href="/page/index/index.css">
+
+<body>
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">
+                <img src="/images/logo.png" alt="" />
+            </div>
+
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                    <a href="javascript:;">
+                        <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
+                            class="layui-nav-img">
+                        <span class="username"></span>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">Your Profile</a></dd>
+                        <dd><a href="">Settings</a></dd>
+                        <dd><a href="">Sign out</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+                    <a href="javascript:;">
+                        <i class="layui-icon layui-icon-logout">退出</i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 左侧内容 -->
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test"
+                lay-shrink="all"
+                >
+                    <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+                        <a href="javascript:;">
+                            <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
+                                class="layui-nav-img"><span class="username"></span>
+                        </a>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" class="layui-icon layui-icon-home">首页</a>
+                    </li>
+                    
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="layui-icon layui-icon-file" href="javascript:;">文件管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" class="layui-icon layui-icon-app">文章类别</a></dd>
+                            <dd><a href="javascript:;" class="layui-icon layui-icon-app">文章列表</a></dd>
+                            <dd><a href="javascript:;" class="layui-icon layui-icon-app">发布文章</a></dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" class="layui-icon layui-icon-username">个人中心</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" class="layui-icon layui-icon-app">基本资料</a></dd>
+                            <dd><a href="javascript:;" class="layui-icon layui-icon-app">更换头像</a></dd>
+                            <dd><a href="javascript:;" class="layui-icon layui-icon-app">重置密码</a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <iframe src="/page/home/home.html" 
+            frameborder="0"
+            style="width: 100%; height:100%"
+            ></iframe>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            底部固定区域
+        </div>
+    </div>
+</body>
+    <script src="/lib/layui-v2.7.5/layui.js"></script>
+    <script src="/lib/jquery-3.6.0.min.js"></script>
+    <script src="/lib/axios.min.js"></script>
+    <script src="/page/index/index.js"></script>
+</html>

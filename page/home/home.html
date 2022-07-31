@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>图表统计</title>
+    <link rel="stylesheet" href="/lib/bootstrap/bootstrap.min.css" />
+    <style>
+      body {
+        font-family: 'MicroSoft YaHei';
+        background-color: #f2f3f5;
+      }
+      .main_wrap {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0px;
+        top: 0px;
+        background: url('../images/login_bg.jpg');
+        background-size: 100% 100%;
+      }
+      .header {
+        width: 1200px;
+        overflow: hidden;
+        margin: 20px auto 0;
+      }
+      .heade .logo {
+        float: left;
+      }
+      .header .copyright {
+        float: right;
+        font-size: 12px;
+        color: #fff;
+        text-align: right;
+        line-height: 20px;
+        margin-top: 10px;
+      }
+      .login_form_con {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -200px;
+        margin-top: -155px;
+        width: 400px;
+        height: 310px;
+        background-color: #edeff0;
+      }
+
+      .login_form {
+        position: relative;
+      }
+
+      .login_form .icon-user {
+        position: absolute;
+        font-size: 16px;
+        color: #999;
+        left: 46px;
+        top: 12px;
+      }
+      .login_form .icon-key {
+        position: absolute;
+        font-size: 18px;
+        color: #999;
+        left: 46px;
+        top: 78px;
+      }
+      .login_title {
+        height: 60px;
+        background: url('../images/login_title.png') center center no-repeat
+          #fff;
+      }
+      .input_txt,
+      .input_pass,
+      .input_sub {
+        display: block;
+        width: 334px;
+        height: 37px;
+        padding: 0px;
+        text-indent: 40px;
+        border: 1px solid #ddd;
+        margin: 27px auto 0;
+        outline: none;
+      }
+      .input_sub {
+        margin-top: 40px;
+        height: 42px;
+        background-color: #19b9e7;
+        text-indent: 0px;
+        font-size: 18px;
+        color: #fff;
+        cursor: pointer;
+      }
+      .input_sub:hover {
+        background-color: #08a0cc;
+      }
+
+      .sider {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 210px;
+        background-color: #323745;
+      }
+      .sider .logo {
+        display: block;
+        height: 56px;
+        background-color: #242732;
+        overflow: hidden;
+      }
+      .sider .logo img {
+        display: block;
+        margin: 6px auto 0;
+      }
+      .user_info {
+        height: 79px;
+        border-bottom: 1px solid #5a5e6b;
+      }
+
+      .user_info img {
+        float: left;
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        margin: 19px 0 0 30px;
+      }
+      .user_info span {
+        float: left;
+        width: 120px;
+        font-size: 12px;
+        color: #fff;
+        margin: 23px 0 0 20px;
+      }
+      .user_info b {
+        float: left;
+        width: 120px;
+        font-weight: normal;
+        font-size: 12px;
+        color: #adafb5;
+        margin: 2px 0 0 20px;
+      }
+
+      .menu .level01 {
+        height: 50px;
+        line-height: 50px;
+      }
+      .menu .level01 a {
+        display: block;
+        height: 50px;
+        font-size: 12px;
+        color: #adafb5;
+        overflow: hidden;
+      }
+      .menu .level01.active a {
+        background-color: #1378f0;
+        color: #fff;
+      }
+      .menu .level01.active i {
+        color: #fff;
+      }
+
+      .menu .level01 a:hover {
+        background-color: #1378f0;
+        color: #fff;
+      }
+      .menu .level01 a:hover i {
+        color: #fff;
+      }
+      .menu .level01 i {
+        color: #61646f;
+        font-size: 22px;
+        float: left;
+        margin-left: 26px;
+      }
+      .menu .level01 span {
+        float: left;
+        margin-left: 10px;
+      }
+      .menu .level01 b {
+        float: right;
+        margin-right: 20px;
+        font-weight: normal;
+        transform: rotate(90deg);
+        transition: all 500ms ease;
+      }
+
+      .menu .level01 .rotate0 {
+        transform: rotate(0deg);
+      }
+
+      .menu .level02 {
+        background: #242732;
+        display: none;
+      }
+
+      .menu .level02 li {
+        height: 40px;
+        line-height: 40px;
+      }
+      .menu .level02 li a {
+        display: block;
+        height: 40px;
+        font-size: 12px;
+        color: #adafb5;
+        overflow: hidden;
+      }
+
+      .menu .level02 li a:hover {
+        background-color: #1378f0;
+        color: #fff;
+      }
+
+      .menu .level02 li i {
+        font-size: 12px;
+        float: left;
+        margin-left: 60px;
+      }
+      .menu .level02 li span {
+        font-size: 12px;
+        float: left;
+        margin-left: 5px;
+      }
+
+      .menu .level02 .active a {
+        color: #ffae00;
+      }
+
+      .header_bar {
+        position: fixed;
+        left: 210px;
+        right: 0;
+        top: 0;
+        height: 56px;
+        background-color: #fff;
+      }
+
+      .main {
+        position: fixed;
+        left: 210px;
+        top: 56px;
+        right: 0;
+        bottom: 0;
+        background-color: #f2f3f5;
+      }
+
+      .search_form {
+        width: 218px;
+        height: 33px;
+        border: 1px solid #ddd;
+        background-color: #f2f3f5;
+        border-radius: 16px;
+        float: left;
+        margin: 12px 0 0 27px;
+      }
+
+      .search_form input {
+        padding: 0px;
+        margin: 0px;
+        border: 0px;
+        float: left;
+        background-color: #f2f3f5;
+        font-size: 12px;
+        width: 175px;
+        height: 31px;
+        margin-left: 12px;
+        outline: none;
+      }
+
+      .search_form .icon-search {
+        line-height: 33px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #abaebb;
+      }
+      .user_center_link {
+        float: right;
+      }
+      .user_center_link a {
+        line-height: 56px;
+        font-size: 12px;
+        color: #999;
+        margin-right: 15px;
+      }
+      .user_center_link a:hover {
+        color: #ffae00;
+      }
+
+      .user_center_link img {
+        width: 42px;
+        height: 42px;
+        border-radius: 32px;
+        margin-right: 10px;
+      }
+
+      .spannel_list {
+        margin-top: 20px;
+      }
+
+      .spannel {
+        height: 100px;
+        overflow: hidden;
+        text-align: center;
+        position: relative;
+        background-color: #fff;
+        border: 1px solid #e7e7e9;
+        margin-bottom: 20px;
+      }
+
+      .spannel em {
+        font-style: normal;
+        font-size: 50px;
+        line-height: 50px;
+        display: inline-block;
+        margin: 10px 0 0 20px;
+        font-family: 'Arial';
+        color: #83a2ed;
+      }
+
+      .spannel span {
+        font-size: 14px;
+        display: inline-block;
+        color: #83a2ed;
+        margin-left: 10px;
+      }
+
+      .spannel b {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        line-height: 24px;
+        background: #e5e5e5;
+        color: #333;
+        font-size: 14px;
+        font-weight: normal;
+      }
+
+      .scolor01 em,
+      .scolor01 span {
+        color: #6ac6e2;
+      }
+
+      .scolor02 em,
+      .scolor02 span {
+        color: #5fd9de;
+      }
+
+      .scolor03 em,
+      .scolor03 span {
+        color: #58d88e;
+      }
+
+      .gragh_pannel {
+        height: 350px;
+        border: 1px solid #e7e7e9;
+        background-color: #fff !important;
+        margin-bottom: 20px;
+      }
+
+      .column_pannel {
+        margin-bottom: 20px;
+        height: 400px;
+        border: 1px solid #e7e7e9;
+        background-color: #fff !important;
+      }
+
+      .common_title {
+        line-height: 42px;
+        background-color: #fbfbfb;
+        border: 1px solid #e7e7e9;
+        margin-top: 20px;
+        text-indent: 15px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .common_con {
+        border: 1px solid #e7e7e9;
+        border-top: 0px;
+        background-color: #fff;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .opt_btns {
+        margin-top: 20px;
+      }
+
+      .mp20 {
+        margin-top: 20px;
+      }
+
+      .pagination {
+        margin: 0;
+      }
+
+      .article_form {
+        margin-top: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-group label {
+        font-weight: normal;
+        color: #666;
+      }
+
+      .icon-icondate {
+        line-height: 16px;
+      }
+
+      .user_pic {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 10px;
+      }
+
+      .article_cover {
+        width: 200px;
+        height: 200px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row spannel_list">
+        <div class="col-sm-3 col-xs-6">
+          <div class="spannel">
+            <em>10015</em>
+            <span>篇</span>
+            <b>总文章数</b>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <div class="spannel scolor01">
+            <em>123</em>
+            <span>篇</span>
+            <b>日新增文章数</b>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <div class="spannel scolor02">
+            <em>35</em>
+            <span>条</span>
+            <b>评论总数</b>
+          </div>
+        </div>
+        <div class="col-sm-3 col-xs-6">
+          <div class="spannel scolor03">
+            <em>123</em>
+            <span>条</span>
+            <b>日新增评论数</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row curve-pie">
+        <div class="col-lg-8 col-md-8">
+          <div class="gragh_pannel" id="curve_show"></div>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <div class="gragh_pannel" id="pie_show"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="column_pannel" id="column_show"></div>
+    </div>
+
+    <script src="/lib/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="/lib/echarts.min.js"></script>
+    <script>
+      var oChart = echarts.init(document.getElementById('curve_show'))
+      var aList_all = [
+        { count: 36, date: '2019-04-13' },
+        { count: 52, date: '2019-04-14' },
+        { count: 78, date: '2019-04-15' },
+        { count: 85, date: '2019-04-16' },
+        { count: 65, date: '2019-04-17' },
+        { count: 72, date: '2019-04-18' },
+        { count: 88, date: '2019-04-19' },
+        { count: 64, date: '2019-04-20' },
+        { count: 72, date: '2019-04-21' },
+        { count: 90, date: '2019-04-22' },
+        { count: 96, date: '2019-04-23' },
+        { count: 100, date: '2019-04-24' },
+        { count: 102, date: '2019-04-25' },
+        { count: 110, date: '2019-04-26' },
+        { count: 123, date: '2019-04-27' },
+        { count: 100, date: '2019-04-28' },
+        { count: 132, date: '2019-04-29' },
+        { count: 146, date: '2019-04-30' },
+        { count: 200, date: '2019-05-01' },
+        { count: 180, date: '2019-05-02' },
+        { count: 163, date: '2019-05-03' },
+        { count: 110, date: '2019-05-04' },
+        { count: 80, date: '2019-05-05' },
+        { count: 82, date: '2019-05-06' },
+        { count: 70, date: '2019-05-07' },
+        { count: 65, date: '2019-05-08' },
+        { count: 54, date: '2019-05-09' },
+        { count: 40, date: '2019-05-10' },
+        { count: 45, date: '2019-05-11' },
+        { count: 38, date: '2019-05-12' },
+      ]
+
+      let aCount = []
+      let aDate = []
+
+      for (var i = 0; i < aList_all.length; i++) {
+        aCount.push(aList_all[i].count)
+        aDate.push(aList_all[i].date)
+      }
+
+      var chartopt = {
+        title: {
+          text: '月新增文章数',
+          left: 'center',
+          top: '10',
+        },
+        tooltip: {
+          trigger: 'axis',
+        },
+        legend: {
+          data: ['新增文章'],
+          top: '40',
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            mark: { show: true },
+            dataView: { show: true, readOnly: false },
+            magicType: { show: true, type: ['line', 'bar'] },
+            restore: { show: true },
+            saveAsImage: { show: true },
+          },
+        },
+        calculable: true,
+        xAxis: [
+          {
+            name: '日',
+            type: 'category',
+            boundaryGap: false,
+            data: aDate,
+          },
+        ],
+        yAxis: [
+          {
+            name: '月新增文章数',
+            type: 'value',
+          },
+        ],
+        series: [
+          {
+            name: '新增文章',
+            type: 'line',
+            smooth: true,
+            itemStyle: {
+              normal: { areaStyle: { type: 'default' }, color: '#f80' },
+              lineStyle: { color: '#f80' },
+            },
+            data: aCount,
+          },
+        ],
+        areaStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgba(255,136,0,0.39)',
+              },
+              {
+                offset: 0.34,
+                color: 'rgba(255,180,0,0.25)',
+              },
+              {
+                offset: 1,
+                color: 'rgba(255,222,0,0.00)',
+              },
+            ]),
+          },
+        },
+        grid: {
+          show: true,
+          x: 50,
+          x2: 50,
+          y: 80,
+          height: 220,
+        },
+      }
+
+      oChart.setOption(chartopt)
+
+      var oPie = echarts.init(document.getElementById('pie_show'))
+      var oPieopt = {
+        title: {
+          top: 10,
+          text: '分类文章数量比',
+          x: 'center',
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+        },
+        color: ['#5885e8', '#13cfd5', '#00ce68', '#ff9565'],
+        legend: {
+          x: 'center',
+          top: 65,
+          data: ['奇趣事', '会生活', '爱旅行', '趣美味'],
+        },
+        toolbox: {
+          show: true,
+          x: 'center',
+          top: 35,
+          feature: {
+            mark: { show: true },
+            dataView: { show: true, readOnly: false },
+            magicType: {
+              show: true,
+              type: ['pie', 'funnel'],
+              option: {
+                funnel: {
+                  x: '25%',
+                  width: '50%',
+                  funnelAlign: 'left',
+                  max: 1548,
+                },
+              },
+            },
+            restore: { show: true },
+            saveAsImage: { show: true },
+          },
+        },
+        calculable: true,
+        series: [
+          {
+            name: '访问来源',
+            type: 'pie',
+            radius: ['45%', '60%'],
+            center: ['50%', '65%'],
+            data: [
+              { value: 300, name: '奇趣事' },
+              { value: 100, name: '会生活' },
+              { value: 260, name: '爱旅行' },
+              { value: 180, name: '趣美味' },
+            ],
+          },
+        ],
+      }
+      oPie.setOption(oPieopt)
+
+      var oColumn = this.echarts.init(document.getElementById('column_show'))
+      var oColumnopt = {
+        title: {
+          text: '文章访问量',
+          left: 'center',
+          top: '10',
+        },
+        tooltip: {
+          trigger: 'axis',
+        },
+        legend: {
+          data: ['奇趣事', '会生活', '爱旅行', '趣美味'],
+          top: '40',
+        },
+        toolbox: {
+          show: true,
+          feature: {
+            mark: { show: true },
+            dataView: { show: true, readOnly: false },
+            magicType: { show: true, type: ['line', 'bar'] },
+            restore: { show: true },
+            saveAsImage: { show: true },
+          },
+        },
+        calculable: true,
+        xAxis: [
+          {
+            type: 'category',
+            data: ['1月', '2月', '3月', '4月', '5月'],
+          },
+        ],
+        yAxis: [
+          {
+            name: '访问量',
+            type: 'value',
+          },
+        ],
+        series: [
+          {
+            name: '奇趣事',
+            type: 'bar',
+            barWidth: 20,
+            itemStyle: {
+              normal: { areaStyle: { type: 'default' }, color: '#fd956a' },
+            },
+            data: [800, 708, 920, 1090, 1200],
+          },
+          {
+            name: '会生活',
+            type: 'bar',
+            barWidth: 20,
+            itemStyle: {
+              normal: { areaStyle: { type: 'default' }, color: '#2bb6db' },
+            },
+            data: [400, 468, 520, 690, 800],
+          },
+          {
+            name: '爱旅行',
+            type: 'bar',
+            barWidth: 20,
+            itemStyle: {
+              normal: { areaStyle: { type: 'default' }, color: '#13cfd5' },
+            },
+            data: [500, 668, 520, 790, 900],
+          },
+          {
+            name: '趣美味',
+            type: 'bar',
+            barWidth: 20,
+            itemStyle: {
+              normal: { areaStyle: { type: 'default' }, color: '#00ce68' },
+            },
+            data: [600, 508, 720, 890, 1000],
+          },
+        ],
+        grid: {
+          show: true,
+          x: 50,
+          x2: 30,
+          y: 80,
+          height: 260,
+        },
+        dataZoom: [
+          //给x轴设置滚动条
+          {
+            start: 0, //默认为0
+            end: 100 - 1000 / 31, //默认为100
+            type: 'slider',
+            show: true,
+            xAxisIndex: [0],
+            handleSize: 0, //滑动条的 左右2个滑动条的大小
+            height: 8, //组件高度
+            left: 45, //左边的距离
+            right: 50, //右边的距离
+            bottom: 26, //右边的距离
+            handleColor: '#ddd', //h滑动图标的颜色
+            handleStyle: {
+              borderColor: '#cacaca',
+              borderWidth: '1',
+              shadowBlur: 2,
+              background: '#ddd',
+              shadowColor: '#ddd',
+            },
+          },
+        ],
+      }
+      oColumn.setOption(oColumnopt)
+    </script>
+  </body>
+</html>

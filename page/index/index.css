@@ -1,0 +1,16 @@
+.layui-icon-home:before {
+  content: "\e68e";
+  padding-right: 5px;
+}
+.layui-icon-username::before {
+  padding-right: 5px;
+}
+.layui-icon-file::before {
+  padding-right: 5px;
+}
+.layui-icon-app::before {
+  padding-right: 5px;
+}
+.layui-nav-img {
+  display: inline;
+}
