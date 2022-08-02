@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/lib/layui-v2.7.5/css/layui.css">
     <link rel="stylesheet" href="/page/avatar/avatar.css">
     <link rel="stylesheet" href="/css/base.css">
-
+    <link rel="stylesheet" href="/lib/cropper/cropper.min.css">
    
 </head>
 <body>
@@ -18,23 +18,37 @@
             <!-- 上面的大盒子 -->
             <div class="container clearfix">
                 <div class="left">
-                    <img src="/images/sample.jpg" alt="" srcset="">
+                    <img src="/images/sample.jpg" 
+                    alt="" 
+                    id="avatar_big_img"
+                    >
                 </div>
                 <div class="right">
                     <div class="top">
-                        <img src="/images/sample.jpg" alt="">
+                        <div class="img" 
+                        id="preview_img_100"></div>
                         <p>100x100</p>
                     </div>
                     <div class="bottom">
-                        <img src="/images/sample.jpg" alt="">
+                        <div class="img"  id="preview_img_50"></div>
                         <p>50x50</p>
                     </div>
                 </div>
             </div>
             <!-- 下面的盒子 -->
             <div class="btn-box">
-                <button type="button" class="layui-btn">上传</button>
-                <button type="button" class="layui-btn layui-btn-danger">确认</button>
+                <input type="file" id="input_file" 
+                accept="image/png, image/jpeg"
+                style="display:none;">
+                <button 
+                type="button" 
+                id="select_img"
+                 class="layui-btn">选择图片</button>
+                <button 
+                type="button" 
+                id="submit" 
+                class="layui-btn 
+                layui-btn-danger">上传头像</button>
             </div>
         </div>
       </div>
@@ -43,5 +57,7 @@
 <script src="/lib/jquery-3.6.0.min.js"></script>
 <script src="/lib/axios.min.js"></script>
 <script src="/js/apiBase.js"></script>
+<script src="/lib/cropper/cropper.min.js"></script>
+<script src="/lib/lodash.js"></script>
 <script src="/page/avatar/avatar.js"></script>
 </html>

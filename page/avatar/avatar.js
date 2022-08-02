@@ -55,3 +55,73 @@ $('#submit').on('submit',function(e){
 $('#reset').on('click',function () { 
     getUserInfo();
  })
+
+
+ const cropper = new Cropper(document.getElementById
+    ('avatar_big_img'), {
+    aspectRatio: 1,//长宽比例 1:1
+    // 只要改变这个裁剪框里的图片就会触发crop这个方法
+    // crop() {
+    //     // 这时我们应该要获取裁剪框的图片
+    
+   
+    //   // 这里为什么要用全局变量，因为下面也要用
+    //   let img_100 = cropper.getCroppedCanvas({
+    //     width: 100,
+    //     height: 100,
+    //   });
+    //   $('#preview_img_100').html(img_100);
+    //   let img_50 = cropper.getCroppedCanvas({
+    //     width: 50,
+    //     height: 50,
+    //   });
+    //   console.log(img_100);
+     
+    //   $('#preview_img_50').html(img_50);
+    // },
+    crop: _.throttle(function(){
+          let img_100 = cropper.getCroppedCanvas({
+        width: 100,
+        height: 100,
+      });
+      $('#preview_img_100').html(img_100);
+      let img_50 = cropper.getCroppedCanvas({
+        width: 50,
+        height: 50,
+      });
+    
+      $('#preview_img_50').html(img_50);
+    })
+  })
+
+  $('#select_img').on('click',function(){
+    $('#input_file').click();
+  })
+
+
+  $('#input_file').on('change',function(){
+    let img_url = URL.createObjectURL(this.files[0]);
+    $('#avatar_big_img').attr('src',img_url);
+    cropper.replace(img_url)
+  })
+
+  
+  $('#submit').on('click',function(){
+    let img_100 = cropper.getCroppedCanvas({
+        width: 100,
+        height: 100,
+      });
+      let img_base64 =  img_100.toDataURL('image/jpeg')
+        encodeURIComponent(img_base64)
+      axios({
+        method:'post',
+        url:'/my/update/avatar',
+        data:`avatar=${encodeURIComponent(img_base64)}`
+
+    })
+    .then(res=>{
+        if(res.data.status ===0){
+            window.parent.getUserInfo();
+        }
+    })
+  })
