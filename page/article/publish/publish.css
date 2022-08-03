@@ -1,0 +1,34 @@
+body {
+  margin: 20px;
+}
+.layui-form-label {
+  width: 100px !important;
+}
+.front-cover {
+  display: flex;
+}
+.front-cover .left {
+  width: 400px;
+  height: 280px;
+}
+.front-cover .left img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  max-width: 100%;
+}
+.front-cover .right {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.front-cover .right .top {
+  width: 200px;
+  height: 140px;
+  margin-bottom: 20px;
+}
+.front-cover .right .top canvas {
+  width: 100%;
+  height: 100%;
+}
