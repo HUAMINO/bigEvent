@@ -61,22 +61,22 @@
                     </li>
 
                     <li class="layui-nav-item">
-                        <a href="javascript:;" class="layui-icon layui-icon-home">首页</a>
+                        <a href="/page/home/home.html" target="main" class="layui-icon layui-icon-home">首页</a>
                     </li>
                     
                     <li class="layui-nav-item layui-nav-itemed">
                         <a class="layui-icon layui-icon-file" href="javascript:;">文件管理</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" class="layui-icon layui-icon-app">文章类别</a></dd>
-                            <dd><a href="javascript:;" class="layui-icon layui-icon-app">文章列表</a></dd>
-                            <dd><a href="javascript:;" class="layui-icon layui-icon-app">发布文章</a></dd>
+                            <dd><a href="/page/article/category/category.html" target="main" class="layui-icon layui-icon-app">文章类别</a></dd>
+                            <dd><a href="/page/article/list/list.html" target="main" class="layui-icon layui-icon-app">文章列表</a></dd>
+                            <dd><a href="/page/article/publish/publish.html" target="main" class="layui-icon layui-icon-app">发布文章</a></dd>
                         </dl>
                     </li>
 
                     <li class="layui-nav-item">
                         <a href="javascript:;" class="layui-icon layui-icon-username">个人中心</a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;" class="layui-icon layui-icon-app">基本资料</a></dd>
+                            <dd><a href="/page/useInfo/userInfo.html" target="main" class="layui-icon layui-icon-app">基本资料</a></dd>
                             <dd><a href="javascript:;" class="layui-icon layui-icon-app">更换头像</a></dd>
                             <dd><a href="javascript:;" class="layui-icon layui-icon-app">重置密码</a></dd>
                         </dl>
@@ -87,7 +87,8 @@
 
         <div class="layui-body">
             <!-- 内容主体区域 -->
-            <iframe src="/page/article/publish/publish.html" 
+            <iframe src="/page/article/list/list.html" 
+            name="main"
             frameborder="0"
             style="width: 100%; height:100%"
             ></iframe>
