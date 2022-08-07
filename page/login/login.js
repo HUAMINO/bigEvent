@@ -76,7 +76,7 @@ $('#login-form').on('submit',function(e){
         console.log(res.data);
         if(res.data.status === 0){
             layer.msg('登录成功');
-            localStorage.setItem('Authorization',res.data.token)
+            localStorage.setItem('Authorization',res.data.token);
             location.href = '../index/index.html'
         }else{
             layer.msg('登录失败')
